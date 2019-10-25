@@ -17,6 +17,10 @@ resources:
       ref: refs/heads/release_to_appstore
       endpoint: shotgunsoftware
 
+# We want builds to trigger for 3 reasons:
+# - The master branch sees new commits
+# - Each PR should get rebuilt when commits are added to it.
+# - When we tag something
 trigger:
   branches:
     include:
