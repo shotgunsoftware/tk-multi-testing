@@ -14,7 +14,7 @@ resources:
     - repository: templates
       type: github
       name: shotgunsoftware/tk-ci-tools
-      ref: refs/heads/run_tests
+      ref: refs/heads/release_to_appstore
       endpoint: shotgunsoftware
 
 trigger:
@@ -35,3 +35,5 @@ variables:
 
 jobs:
 - template: build-pipeline.yml@templates
+  parameters:
+    skip_tests: true
