@@ -8,6 +8,7 @@
 
 from tank.platform.qt import QtCore, QtGui
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -20,12 +21,16 @@ class Ui_Dialog(object):
         self.logo_example.setObjectName("logo_example")
         self.horizontalLayout.addWidget(self.logo_example)
         self.context = QtGui.QLabel(Dialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy = QtGui.QSizePolicy(
+            QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.context.sizePolicy().hasHeightForWidth())
         self.context.setSizePolicy(sizePolicy)
-        self.context.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.context.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
+        )
         self.context.setObjectName("context")
         self.horizontalLayout.addWidget(self.context)
 
@@ -33,7 +38,19 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "The Current Sgtk Environment", None, QtGui.QApplication.UnicodeUTF8))
-        self.context.setText(QtGui.QApplication.translate("Dialog", "Your Current Context: ", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.setWindowTitle(
+            QtGui.QApplication.translate(
+                "Dialog",
+                "The Current Sgtk Environment",
+                None,
+                QtGui.QApplication.UnicodeUTF8,
+            )
+        )
+        self.context.setText(
+            QtGui.QApplication.translate(
+                "Dialog", "Your Current Context: ", None, QtGui.QApplication.UnicodeUTF8
+            )
+        )
+
 
 from . import resources_rc
