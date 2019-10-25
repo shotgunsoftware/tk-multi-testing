@@ -17,6 +17,11 @@ resources:
       ref: refs/heads/run_tests
       endpoint: shotgunsoftware
 
+trigger:
+  branches:
+    include:
+    - master
+
 # This pulls in a variable group from Azure. Variables can be encrypted or not.
 variables:
 - group: deploy-secrets
