@@ -8,6 +8,15 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
+# Imports the shared Azure CI tools
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: shotgunsoftware/tk-ci-tools
+      ref: refs/heads/release_to_appstore
+      endpoint: shotgunsoftware
+
 # Configures CI to be triggered by changes to any branches and on tag creation.
 trigger:
   branches:
@@ -21,8 +30,6 @@ trigger:
 variables:
 - group: deploy-secrets
 
-# Invoke the build pipeline template with Qt.py has an extra dependency so
-# the tests can run properly.
 jobs:
-- template: build-pipeline.yml
+- template: build-pipeline.yml@templates
   skip_tests: true
