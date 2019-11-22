@@ -36,7 +36,12 @@ pr:
 
 # This pulls in a variable group from Azure. Variables can be encrypted or not.
 variables:
-  - ${{ if eq( variables['System.PullRequest.IsFork'], 'potateo' ) }}:
+  # FIXME: We should find a better to avoid including this step on forked repos.
+  # This assumes that all repositories will be under a project name Toolkit
+  # in Azure. Clients who have the misfortune of using the name project team
+  # will try to fetch the deploy secrets but fail because they do not own
+  # this variable group.
+  - ${{ if eq( variables['System.TeamProject'], 'Toolkit' ) }}:
     - group: deploy-secrets
 
 jobs:
