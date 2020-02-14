@@ -41,3 +41,4 @@ jobs:
 - template: build-pipeline.yml@templates
   parameters:
     skip_tests: true
+    tk_toolchain_ref: tk_update_configs
