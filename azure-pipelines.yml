@@ -14,7 +14,7 @@ resources:
     - repository: templates
       type: github
       name: shotgunsoftware/tk-ci-tools
-      ref: refs/heads/release_to_appstore_and_upload
+      ref: refs/heads/SG-16065-aws-support-for-appstore-release
       endpoint: shotgunsoftware
 
 # We want builds to trigger for 3 reasons:
@@ -41,3 +41,4 @@ jobs:
 - template: build-pipeline.yml@templates
   parameters:
     skip_tests: true
+    release_repo_ref: SG-16065-aws-support
