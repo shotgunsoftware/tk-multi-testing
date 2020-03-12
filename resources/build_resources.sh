@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2016 Shotgun Software Inc.
+# Copyright (c) 2013 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
 #
@@ -11,10 +11,8 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 # The path to output all built .py files to:
-UI_PYTHON_PATH=../python/tk_multi_demo/ui
+UI_PYTHON_PATH=../python/app/ui
 
-# Remove any problematic profiles from pngs.
-for f in *.png; do mogrify $f; done
 
 # Helper functions to build UI files
 function build_qt {
@@ -32,13 +30,13 @@ function build_ui {
 }
 
 function build_res {
-    build_qt "pyside-rcc" "$1.qrc" "$1_rc"
+    build_qt "pyside-rcc -py3" "$1.qrc" "$1_rc"
 }
 
 
 # build UI's:
-#echo "building user interfaces..."
-#build_ui dialog
+echo "building user interfaces..."
+build_ui dialog
 # add any additional .ui files you want converted here!
 
 # build resources

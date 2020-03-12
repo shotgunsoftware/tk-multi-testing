@@ -1,4 +1,4 @@
-# Copyright (c) 2016 Shotgun Software Inc.
+# Copyright (c) 2013 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
 #
@@ -8,65 +8,34 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-import sgtk
-from sgtk.util import get_current_user
+
+from sgtk.platform import Application
 
 
-class FrameworkDemos(sgtk.platform.Application):
+class StgkStarterApp(Application):
     """
-    Demo and QA Toolkit app building blocks.
+    The app entry point. This class is responsible for initializing and tearing down
+    the application, handle menu registration etc.
     """
 
     def init_app(self):
         """
-        Initialize the app.
+        Called as the application is being initialized
         """
 
-        self.__demo_entities = {}
+        # first, we use the special import_module command to access the app module
+        # that resides inside the python folder in the app. This is where the actual UI
+        # and business logic of the app is kept. By using the import_module command,
+        # toolkit's code reload mechanism will work properly.
+        app_payload = self.import_module("app")
 
-        payload = self.import_module("tk_multi_demo")
+        # now register a *command*, which is normally a menu entry of some kind on a Shotgun
+        # menu (but it depends on the engine). The engine will manage this command and
+        # whenever the user requests the command, it will call out to the callback.
 
-        # define a callback method to show the dialog
-        def callback():
-            payload.dialog.show_dialog(self)
+        # first, set up our callback, calling out to a method inside the app module contained
+        # in the python folder of the app
+        menu_callback = lambda: app_payload.dialog.show_dialog(self)
 
-        self.engine.register_command(
-            "Shotgun Toolkit Demos",
-            callback,
-            {"short_name": "demos"}
-        )
-
-    def get_demo_entity(self, entity_type=None):
-        """
-        Return an entity of supplied type that is a good candidate for demo'ing.
-
-        If the entity type is None, the currently authenticated HumanUser will
-        be returned.
-        """
-
-        if not entity_type:
-            entity_type = "HumanUser"
-
-        if entity_type not in self.__demo_entities:
-
-            entity = None
-
-            # TODO: add other types here
-            if entity_type == "Project":
-                if self.context.project:
-                    entity = self.context.project
-                else:
-                    entity = self.shotgun.find_one(entity_type, [])
-            elif entity_type == "HumanUser":
-                entity = get_current_user(self.sgtk)
-            else:
-                 # TODO: can we filter this at all?
-                 entity = self.shotgun.find_one(entity_type, [])
-
-            if not entity:
-                return None
-
-            self.__demo_entities[entity_type] = entity
-
-        return self.__demo_entities[entity_type]
-
+        # now register the command with the engine
+        self.engine.register_command("Show Starter Template App...", menu_callback)
