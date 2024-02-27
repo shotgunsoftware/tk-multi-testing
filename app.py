@@ -29,9 +29,10 @@ class StgkStarterApp(Application):
         # toolkit's code reload mechanism will work properly.
         app_payload = self.import_module("app")
 
-        # now register a *command*, which is normally a menu entry of some kind on a Shotgun
-        # menu (but it depends on the engine). The engine will manage this command and
-        # whenever the user requests the command, it will call out to the callback.
+        # now register a *command*, which is normally a menu entry of some kind on a
+        # Flow Production Tracking menu (but it depends on the engine). The engine will
+        # manage this command and whenever the user requests the command, it will call
+        # out to the callback.
 
         # first, set up our callback, calling out to a method inside the app module contained
         # in the python folder of the app
