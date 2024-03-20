@@ -60,7 +60,7 @@ class AppDialog(QtGui.QWidget):
 
         # via the self._app handle we can for example access:
         # - The engine, via self._app.engine
-        # - A Shotgun API instance, via self._app.shotgun
+        # - A Flow Production Tracking API instance, via self._app.shotgun
         # - An Sgtk API instance, via self._app.sgtk
 
         # lastly, set up our very basic UI
